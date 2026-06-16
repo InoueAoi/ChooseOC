@@ -1,55 +1,89 @@
 /*Copyright 2019 井上葵*/
+html {
+  height: 100%;
+}
 body {
-  background-image: url('background.png');
-  font-family: "TsukuARdGothic-Regular", serif;
+  height: 100%;
+  font-family: "TsukuARdGothic-Regular", sans-serif;
   margin: 0;
   text-align: center;
 }
 button {
+  font-family: "TsukuARdGothic-Regular", sans-serif;
   background-color: cornflowerblue;
   border: outset 3px cornflowerblue;
-  font-size: 12px;
 }
 button:active {
   border-style: inset;
 }
 div {
+  min-height: 100%;
   background-color: aliceblue;
   display: inline-block;
-  padding-top: 2em;
-  padding-bottom: 2em;
-  width: 864px;
-}
-form {
-  display: block;
-  margin: auto;
-  width: 24em;
+  padding: 0;
 }
 h1 {
-  font-size: 40px;
+  margin: 40px 0;
 }
 h3 {
   background-color: cadetblue;
   color: white;
-  font-size: 1.5em;
 }
 h4 {
   background-color: maroon;
   color: lightcyan;
-  font-size: 1em;
-}
-input[type = "text"] {
-  font-size: 12px;
-  height: 18px;
-  margin-left: 1em;
-  margin-right: 1em;
-  width: 20em;
 }
 section {
   display: inline-block;
-  width: 720px;
 }
 #file-guide {
   height: 32px;
   width: 100%;
+}
+@media screen and (min-width: 864px) {
+  body {
+    background-image: url('background.png');
+  }
+  button {
+    font-size: 18px;
+  }
+  div {
+    min-height: 100%;
+    width: 864px;
+  }
+  h1 {
+    font-size: 40px;
+  }
+  h3 {
+    font-size: 24px;
+  }
+  h4 {
+    font-size: 18px;
+  }
+  section {
+    font-size: 18px;
+    width: 720px;
+  }
+}
+@media screen and (max-width: 768px) {
+  button {
+    font-size: 18px;
+  }
+  div{
+    width: 100%;
+    padding: 0;
+  }
+  h1 {
+    font-size: 48px;
+  }
+  h3 {
+    font-size: 24px;
+  }
+  h4 {
+    font-size: 18px;
+  }
+  section {
+    width: 100%;
+    font-size: 18px;
+  }
 }

@@ -2,100 +2,29 @@
 'use strict';
 const anchor = document.createElement('a'), // anchor要素の生成
       br = document.createElement('br'),    // break要素の生成
-      //  キャラクターのデータベース
-      characters = [
-        {
-          name: 'アオバ',
-          series: 'psycho',
-          url: 'https://docs.google.com/document/d/1gmKUzaNZyfPHaR4lg3zUkRgHAmQLqp2s24k4kmoKoxI/edit?tab=t.rcjpnkkunh2f'
-        },
-        {
-          name: 'リエン',
-          series: 'psycho',
-          url: 'https://docs.google.com/document/d/1gmKUzaNZyfPHaR4lg3zUkRgHAmQLqp2s24k4kmoKoxI/edit?tab=t.mumsjfat0p5b'
-        },
-        {
-          name: 'ヴェン',
-          series: 'psycho',
-          url: 'https://docs.google.com/document/d/1gmKUzaNZyfPHaR4lg3zUkRgHAmQLqp2s24k4kmoKoxI/edit?tab=t.rfd20i7bh3f0'
-        },
-        {
-          name: 'ハル',
-          series: 'psycho',
-          url: undefined
-        },
-        {
-          name: 'シィ',
-          series: 'psycho',
-          url: undefined
-        },
-        {
-          name: '暁',
-          series: 'psycho',
-          url: undefined
-        },
-        {
-          name: 'フォメット',
-          series: 'psycho',
-          url: undefined
-        },
-        {
-          name: 'レアリ',
-          series: 'psycho',
-          url: undefined
-        },
-        {
-          name: 'アオイ',
-          series: 'devil’sMarch',
-          url: undefined
-        },
-        {
-          name: 'ネル',
-          series: 'devil’sMarch',
-          url: undefined
-        },
-        {
-          name: 'ケイ',
-          series: 'devil’sMarch',
-          url: undefined
-        },
-        {
-          name: 'チノ',
-          series: 'inhumans',
-          url: undefined
-        },
-        {
-          name: 'ユリア',
-          series: 'devil’sMarch',
-          url: undefined
-        },
-        {
-          name: 'サティ',
-          series: 'inhumans',
-          url: undefined
-        },
-        {
-          name: '裏サティ',
-          series: 'inhumans',
-          url: undefined
-        }
-      ],
       doSelect = document.getElementById('do-select'),  //  ガチャボタンの要素を取得
       protGiude = document.getElementById('prot-guide'),//  プロットについての欄を取得
       selectResult = document.getElementById('select-result'),//  結果を表示する要素を取得
-      today = new Date(); //  結果を日替わりにするので、日付を取得
+      today = new Date();
 
 doSelect.onclick = selectCharacter;
 
-function selectCharacter() {
+async function getJSON(URL) {
+    let jsonURL = URL;
+    var request = new Request(jsonURL);
+    var response = await fetch(request);
+    var json = await response.json();
+    return json;
+}
+
+async function selectCharacter() {
   if (selectResult.innerText) {
     return;
   }
 
-  let date = today.getDate(),
-  month = today.getMonth(),
-  year = today.getFullYear(),
-  charaNumber = (year + month + date) % characters.length,
+  let characters = await getJSON('https://raw.githubusercontent.com/InoueAoi/ChooseOC/refs/heads/main/characters.json'),
+  date = Math.floor(today / 1000 / 60 / 60 / 24),
+  charaNumber = date % characters.length,
   chara = characters[charaNumber];
 
   if (chara.url) {
