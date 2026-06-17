@@ -23,14 +23,15 @@ async function selectCharacter() {
   }
 
   let characters = await getJSON('https://raw.githubusercontent.com/InoueAoi/ChooseOC/refs/heads/main/characters.json'),
-  date = Math.floor(today / 1000 / 60 / 60 / 24),
+  date = Math.floor((today.getTime() + 1000 * 60 * 60 * 9) / 1000 / 60 / 60 / 24),
   charaNumber = date % characters.length,
   chara = characters[charaNumber];
+  // console.log(chara);
 
   if (chara.url) {
     anchor.href = chara.url;
     anchor.innerText = 'これをクリック';
-  } else {
+  } else if (!chara.url) {
     anchor.innerText = 'こいつのプロットは存在しない。書け。';
   }
 
